@@ -1,6 +1,5 @@
 # GEOG478
-Aubree Rodriguez
-| Labs            | Links           |
+| Labs            | Links         |
 |: ------------- :|:-------------:|
 | Lab 1 | |
 | Lab 2 | |
