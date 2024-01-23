@@ -1,7 +1,7 @@
 # GEOG478
 | Labs | Links    |
 | :---:   | :---: |
-| Lab 1 |[Lab Link](/Lab 1/README.md)|
+| Lab 1 |[Lab-Link](Lab 1/README.md)|
 | Lab 2 | README.md |
 | Lab 3 |    |
 | Lab 4 |    |
