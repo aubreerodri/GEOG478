@@ -1,12 +1,11 @@
 # GEOG478
-Table:-
 | Labs            | Links         |
 |: ------------- :|:-------------:|
-| Lab 1 | |
-| Lab 2 | |
-| Lab 3 | | 
-| Lab 4 | |
-| Lab 5 | |
-| Lab 6 | | 
-| Lab 7 | |
-| Lab 8 | |
+| Lab 1 | info |
+| Lab 2 | info |
+| Lab 3 | info | 
+| Lab 4 | info |
+| Lab 5 | info |
+| Lab 6 | info | 
+| Lab 7 | info |
+| Lab 8 | info |
