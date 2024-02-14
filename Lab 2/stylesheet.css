@@ -5,10 +5,13 @@
     font-family: "Abel", sans-serif;
     font-weight: 400;
     font-style: normal;
+    font-size: 20px;
 }
 
 body,header,nav,section,footer {
     text-align: center;
+    overflow-x: hidden;
+    background: #f5f1e9;
 }
 
 .title-font {
@@ -16,15 +19,30 @@ body,header,nav,section,footer {
     font-weight: 400;
     font-style: normal;
     font-size: 50px;
+    color:#386641;
 }
 .otherheading{
     font-family: "Righteous", sans-serif;
     font-weight: 400;
     font-style: normal;
     font-size: 30px;
+    color:#6A994E;
 }
 .websiteLink{
     color: #6A994E;
+}
+p{
+    color:#386641;
+}
+.figcaption{
+    color:#386641;
+}
+.pinkheading{
+    color:#BC4749;
+    font-family: "Righteous", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 30px;
 }
 .mePic {
     width: 300px;
@@ -34,29 +52,72 @@ body,header,nav,section,footer {
 .resumeCard {
     width: 500px;
     height: 600px;
-    background: #F5F5F5;
+    background: #6A994E;
     border-radius: 0.4em;
     box-shadow: 0.3em 0.3em 0.7em #eff6f0;
     transition: border 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    border: #F5F5F5 0.2em solid;
-    align-content: center;
-    margin-left: auto;
-    margin-right: auto;
-
+    border: #6A994E 0.2em solid;
+    align-content: right;
+    margin-left: 180px;
 }
 
 .resumeCard:hover {
     border: #BC4749 0.2em solid;
-    margin-left: auto;
-    margin-right: auto;
+    align-content: right;
+    margin-left: 180px;
 }
 
 .picResume {
-    width: 494px;
-    height: 595px;
+    width: 492px;
+    height: 592px;
     align-content: center;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 0.2em;
+}
+/*resume end*/
+.resume-section{
+    align-content: left;
     margin-left: auto;
     margin-right: auto;
 }
 
-/*resume end*/
+.experience-skill{
+    align-content: right;
+    margin-right: -600px;
+    margin-top: -500px;
+}
+
+.introparagraph{
+    align-content: center;
+    margin-left: auto;
+    margin-right: auto;
+    width:800px;
+}
+
+/* watermelon list*/
+.ordered li {
+    list-style-type: lower-roman;
+    list-style-position: inside;
+    display: list-item;
+    color: #386641;
+}
+
+.watermelonList {
+    list-style-type: none;
+}
+
+.watermelonList li {
+    color: #386641;
+}
+
+.watermelonList li::before {
+    content: '';
+    display: inline-block;
+    height: 35px;
+    width: 35px;
+    background-image: url('watermelon-transparent.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    transform: translateY(10px);
+}
