@@ -1,60 +1,62 @@
-/* Reset CSS */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: "Abel", sans-serif;
+    font-weight: 400;
+    font-style: normal;
 }
 
-/* Global Styles */
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f0f0f0;
-    color: #333;
-    line-height: 1.6;
-}
-
-.container {
-    width: 80%;
-    margin: auto;
-    overflow: hidden;
-}
-
-/* Header */
-header {
-    background: #333;
-    color: #fff;
-    padding: 20px 0;
-}
-
-header h1 {
+body,header,nav,section,footer {
     text-align: center;
 }
 
-/* Navigation */
-nav ul {
-    list-style: none;
-    text-align: center;
+.title-font {
+    font-family: "Righteous", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 50px;
+}
+.otherheading{
+    font-family: "Righteous", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 30px;
+}
+.websiteLink{
+    color: #6A994E;
+}
+.mePic {
+    width: 300px;
 }
 
-nav ul li {
-    display: inline;
-    margin: 0 10px;
+/*resume stuff*/
+.resumeCard {
+    width: 500px;
+    height: 600px;
+    background: #F5F5F5;
+    border-radius: 0.4em;
+    box-shadow: 0.3em 0.3em 0.7em #eff6f0;
+    transition: border 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    border: #F5F5F5 0.2em solid;
+    align-content: center;
+    margin-left: auto;
+    margin-right: auto;
+
 }
 
-nav ul li a {
-    color: #fff;
-    text-decoration: none;
+.resumeCard:hover {
+    border: #BC4749 0.2em solid;
+    margin-left: auto;
+    margin-right: auto;
 }
 
-/* Main Content */
-main {
-    padding: 20px;
+.picResume {
+    width: 494px;
+    height: 595px;
+    align-content: center;
+    margin-left: auto;
+    margin-right: auto;
 }
 
-/* Footer */
-footer {
-    background: #333;
-    color: #fff;
-    text-align: center;
-    padding: 20px 0;
-}
+/*resume end*/
