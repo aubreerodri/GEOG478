@@ -1,7 +1,82 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <title>add a title</title>
-  </head>
-  <body></body>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aubree's First Web Map</title>
+    <!-- Include Leaflet CSS file -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.1/dist/leaflet.css"
+        integrity="sha512-Rksm5RenBEKSKFjgI3a41vrjkw4EVPlJ3+OiI65vTjIdo9brlAacEuKOiQ5OFh7cOI1bkDwLqdLw3Zg0cRJAAQ=="
+        crossorigin="" />
+    <style>
+        #mapid {
+            height: 500px;
+        }
+
+    </style>
+</head>
+
+<body>
+    <!-- Put a div element with a certain id where you want your map to be -->
+    <div id="mapid"></div>
+
+    <!-- Include Leaflet JavaScript file after Leaflet’s CSS -->
+    <script src="https://unpkg.com/leaflet@1.3.1/dist/leaflet.js"
+        integrity="sha512-/Nsx9X4HebavoBvEBuyp3I7od5tA0UzAxs+j83KgC8PU0kgB4XiK4Lfe4y4cgBtaRJQEIFCW+oC506aPT2L1zw=="
+        crossorigin="">
+    </script>
+
+    <script>
+        // Setting up the map
+        var mymap = L.map('mapid').setView([30.6102, -96.3417], 15);
+
+        // Adding a tile layer
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors',
+            maxZoom: 18,
+        }).addTo(mymap);
+
+        // Draw a circle around Kyle Field with a popup
+        var kyleField = L.circle([30.6099, -96.3404], {
+            color: 'maroon',
+            fillColor: 'maroon',
+            fillOpacity: 0.5,
+            radius: 150
+        }).addTo(mymap);
+        kyleField.bindPopup("<b>Kyle Field</b><br>Home of the Aggies");
+
+        // Create custom icons with popups for O&M and Academic Building
+        var omIcon = L.icon({
+            iconUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon-2x.png',
+            iconSize: [38, 55],
+            iconAnchor: [22, 94],
+            popupAnchor: [-3, -76]
+        });
+        var omMarker = L.marker([30.617619, -96.33668], { icon: omIcon }).addTo(mymap);
+        omMarker.bindPopup("<b>O&M Building</b><br>Texas A&M University");
+
+        var academicIcon = L.icon({
+            iconUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon-2x.png',
+            iconSize: [38, 55],
+            iconAnchor: [22, 94],
+            popupAnchor: [-3, -76]
+        });
+        var academicMarker = L.marker([30.618661, -96.336365], { icon: academicIcon }).addTo(mymap);
+        academicMarker.bindPopup("<b>Academic Building</b><br>Texas A&M University");
+
+        // Create an event to show coordinates in a popup when clicked on the map
+        function onMapClick(e) {
+            L.popup()
+                .setLatLng(e.latlng)
+                .setContent("You clicked the map at " + e.latlng.toString())
+                .openOn(mymap);
+        }
+        mymap.on('click', onMapClick);
+
+        // Zoom the map view to the detected location
+        mymap.locate({ setView: true, maxZoom: 16 });
+    </script>
+</body>
+
 </html>
