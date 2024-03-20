@@ -106,7 +106,7 @@
         L.geoJSON(myPolys, {
             style: function (feature) {
                 switch (feature.properties.party) {
-                    case 'Republican': return { color: "#ff0000" };
+                    case 'Republican': return { color: "#ff0000", stroke: "#ff0000", fill: "#ff0000"};
                     case 'Democrat': return { color: "#0000ff" };
                 }
             }
