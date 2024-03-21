@@ -2,16 +2,33 @@
 <html>
 
 <head>
-    <title>Leaflet Map Example</title>
+    <title>Aubree Rodriguez TAMU Map</title>
     <!-- Include Leaflet CSS file -->
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.1/dist/leaflet.css"
-        integrity="sha512-Rksm5RenBEKSKFjgI3a41vrjkw4EVPlJ3+OiI65vTjIdo9brlAacEuKOiQ5OFh7cOI1bkDwLqdLw3Zg0cRJAAQ=="
-        crossorigin="" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+        integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
     <!-- Make sure you put this AFTER Leaflet's CSS -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+        integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin="">
+        </script>
     <style>
         #mapid {
             height: 600px;
             width: 800px;
+        }
+
+        .info {
+            padding: 6px 8px;
+            font: 14px/16px Arial, Helvetica, sans-serif;
+            background: white;
+            background: rgba(255, 255, 255, 0.8);
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+            border-radius: 5px;
+        }
+
+        .info h4 {
+            margin: 0 0 5px;
+            font: 18px/20px Arial, Helvetica, sans-serif;
+            color: #777;
         }
     </style>
 </head>
@@ -20,112 +37,83 @@
     <!-- Put a div element with a certain id where you want your map to be -->
     <div id="mapid"></div>
 
-    <!-- Include Leaflet JavaScript file -->
-    <script src="https://unpkg.com/leaflet@1.3.1/dist/leaflet.js"
-        integrity="sha512-/Nsx9X4HebavoBvEBuyp3I7od5tA0UzAxs+j83KgC8PU0kgB4XiK4Lfe4y4cgBtaRJQEIFCW+oC506aPT2L1zw=="
-        crossorigin=""></script>
+    <!-- Include TAMU Building JavaScript file -->
+    <script type="text/javascript" src="/Lab 6/tamu-buildings.js"></script> 
 
     <script>
         // Setting up the map
-        var map = L.map('mapid').setView([39.74739, -106], 4);
+        var map = L.map('mapid').setView([30.613, -96.348], 14);
 
         // Adding tile layer
-        L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
-            attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
-            maxZoom: 18,
-            id: 'mapbox.streets',
-            accessToken: 'your.mapbox.access.token'
+        var tiles = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                maxZoom: 19,
+                attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, ' +
+                    '<a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
+                    'Imagery © <a href="http://mapbox.com">Mapbox</a>',
+                id: 'mapbox.streets'
         }).addTo(map);
 
-        // Adding GeoJSON Features (Point/Line/Polygon) into Your Map
-        var myPoint = {
-            "type": "Feature",
-            "properties": {
-                "name": "Coors Field",
-                "amenity": "Baseball Stadium",
-                "popupContent": "This is where the Rockies play!"
-            },
-            "geometry": {
-                "type": "Point",
-                "coordinates": [-104.99404, 39.75621]
-            }
-        };
-
-        var myLines = [{
-            "type": "LineString",
-            "coordinates": [[-100, 40], [-105, 45], [-110, 55]]
-        }, {
-            "type": "LineString",
-            "coordinates": [[-105, 40], [-110, 45], [-115, 55]]
-        }];
-
-        var myPolys = [{
-            "type": "Feature",
-            "properties": { "party": "Republican" },
-            "geometry": {
-                "type": "Polygon",
-                "coordinates": [[
-                    [-104.05, 48.99],
-                    [-97.22, 48.98],
-                    [-96.58, 45.94],
-                    [-104.03, 45.94],
-                    [-104.05, 48.99]
-                ]]
-            }
-        }, {
-            "type": "Feature",
-            "properties": { "party": "Democrat" },
-            "geometry": {
-                "type": "Polygon",
-                "coordinates": [[
-                    [-109.05, 41.00],
-                    [-102.06, 40.99],
-                    [-102.03, 36.99],
-                    [-109.04, 36.99],
-                    [-109.05, 41.00]
-                ]]
-            }
-        }];
-
-        // Adding GeoJSON objects to the map
-        L.geoJSON(myPoint).addTo(map);
-        L.geoJSON(myLines).addTo(map);
-        L.geoJSON(myPolys).addTo(map);
-
-        // Styling Your Feature
-        var myStyle = {
-            "color": "#ff7800",
-            "weight": 5,
-            "opacity": 0.65
-        };
-
-        L.geoJSON(myLines, {
-            style: myStyle
-        }).addTo(map);
-
-        L.geoJSON(myPolys, {
+        // Adding TAMU buildings
+        var buildingsLayer = L.geoJSON(tamu, {
             style: function (feature) {
-                switch (feature.properties.party) {
-                    case 'Republican': return { color: "#ff0000", stroke: "#ff0000", fill: "#ff0000"};
-                    case 'Democrat': return { color: "#0000ff" };
-                }
+                return {
+                    color: "Maroon", // Set the color to Maroon
+                    fillColor: "Maroon", // Set the fill color to Maroon
+                    fillOpacity: 0.5
+                };
+            },
+            onEachFeature: function (feature, layer) {
+                // Add highlighting and click listener
+                layer.on({
+                    mouseover: highlightFeature,
+                    mouseout: resetHighlight,
+                    click: zoomToFeature
+                });
             }
         }).addTo(map);
 
-        // Adding Interaction
+        // Highlight feature function
+        function highlightFeature(e) {
+            var layer = e.target;
+
+            layer.setStyle({
+                weight: 5,
+                color: '#666',
+                fillOpacity: 0.7
+            });
+
+            layer.bringToFront();
+            info.update(layer.feature.properties);
+        }
+
+        // Reset highlight function
+        function resetHighlight(e) {
+            buildingsLayer.resetStyle(e.target);
+        }
+
+        // Zoom to feature function
         function zoomToFeature(e) {
             map.fitBounds(e.target.getBounds());
         }
 
-        function onEachFeature(feature, layer) {
-            layer.on({
-                click: zoomToFeature
-            });
-        }
+        // Info Control
+        var info = L.control();
 
-        L.geoJSON(myPolys, {
-            onEachFeature: onEachFeature
-        }).addTo(map);
+        info.onAdd = function (map) {
+            this._div = L.DomUtil.create('div', 'info');
+            this.update();
+            return this._div;
+        };
+
+        info.update = function (props) {
+            this._div.innerHTML = '<h4>Building Information</h4>' +
+                (props ?
+                    '<b>Building Name: </b><p>' + props.BldgName + '</p><br/><b>Building Abbreviation: </b><p>' + props.BldgAbbr + '</p>'
+                    : 'Hover Over a Building');
+        };
+
+        info.addTo(map);
+
     </script>
 </body>
 
