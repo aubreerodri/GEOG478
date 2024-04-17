@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Lab 8 TAMU Buildings</title>
+    <link rel="stylesheet" href="https://js.arcgis.com/4.6/esri/css/main.css">
+    <script src="https://js.arcgis.com/4.6/"></script>
+
+    <style>
+        body {
+            font-family: sans-serif;
+            padding: 0;
+            margin: 0;
+            height: 100%;
+            width: 100%;
+            overflow: hidden;
+        }
+    
+        #viewDiv {
+            position: absolute;
+            right: 0;
+            left: 0;
+            top: 0;
+            bottom: 0;
+        }
+        .title {
+            position: absolute;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 1000; /* Ensure the title appears above other elements */
+            text-align: center;
+            font-size: 24px;
+            margin-bottom: 20px;
+            font-weight: bold;
+            color: #333; /* Adjust the color as needed */
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3); /* Add a subtle text shadow */
+        }
+    </style>
+  </head>
+
+  <body>
+    <div class="title">Lab 8 TAMU Buildings by Aubree Rodriguez</div>
+    <div id="viewDiv"></div>
+    <script>
+        
+        require([
+            "esri/Map",
+            "esri/views/MapView",
+            "esri/layers/FeatureLayer",
+            "dojo/domReady!"
+        ], function (
+            Map, MapView, FeatureLayer
+        ) {
+
+            var map = new Map({
+                basemap: "streets"
+            });
+
+            var view = new MapView({
+                container: "viewDiv",
+                map: map,
+                center: [-96.339469, 30.617492],
+                zoom: 13
+            });
+
+            var popupTemplate = {
+                title: "{Name}",
+                actions: [{
+                    id: "find"
+                }],
+                content: [{
+                    type: "fields",
+                    fieldInfos: [{
+                        fieldName: "FID",
+                        label: "Building ID Number"
+                    }]
+                }]
+            };
+
+            var featureLayer = new FeatureLayer({
+                url: "https://services1.arcgis.com/qr14biwnHA6Vis6l/arcgis/rest/services/MapWbuildings/FeatureServer/0"
+            });
+            var featureLayer = new FeatureLayer({
+                url: "https://services1.arcgis.com/qr14biwnHA6Vis6l/arcgis/rest/services/MapWbuildings/FeatureServer/0",
+                popupTemplate: popupTemplate // set the popup template
+            });
+
+            map.add(featureLayer);
+
+        });
+
+            
+    </script>
+    
+    
+  </body>
+</html>
