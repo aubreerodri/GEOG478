@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Baseball GeoJSON Example</title>
+  <!-- Include Leaflet CSS and JavaScript -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.1/dist/leaflet.css"
+    integrity="sha512-Rksm5RenBEKSKFjgI3a41vrjkw4EVPlJ3+OiI65vTjIdo9brlAacEuKOiQ5OFh7cOI1bkDwLqdLw3Zg0cRJAAQ=="
+    crossorigin="" />
+  <!-- Make sure you put this AFTER Leaflet's CSS -->
+  <script src="https://unpkg.com/leaflet@1.3.1/dist/leaflet.js"
+    integrity="sha512-/Nsx9X4HebavoBvEBuyp3I7od5tA0UzAxs+j83KgC8PU0kgB4XiK4Lfe4y4cgBtaRJQEIFCW+oC506aPT2L1zw=="
+    crossorigin=""></script>
+  <style>
+    /* Add any custom styles here */
+    #map {
+      height: 400px;
+      width: 50%;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Create a div for the map -->
+  <div id="map"></div>
+
+  <script>
+    // Initialize Leaflet map
+    var map = L.map('map').setView([39.75621, -104.99404], 15); // Set initial map center and zoom level
+
+    // Add a tile layer to the map
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+    }).addTo(map);
+
+    function onEachFeature(feature, layer) {
+      // does this feature have a property named popupContent?
+      if (feature.properties && feature.properties.popupContent) {
+        layer.bindPopup(feature.properties.popupContent);
+      }
+    }
+
+  // Define Coors Field coordinates and popup content
+  var coorsFieldCoordinates = [39.7554, -104.994];
+  var coorsFieldPopupContent = "<b>Name:</b> Coors Field<br><b>Amenity:</b> Baseball Stadium<br><b>Popup Content:</b> This is where the Rockies play!";
+  var coorsFieldMarker = L.marker(coorsFieldCoordinates).addTo(map);
+  coorsFieldMarker.bindPopup(coorsFieldPopupContent);
+
+  // Define Bushfield boundary coordinates
+  var bushfieldCoordinates = [
+    [39.757696, -104.9940],
+    [39.756156, -104.9920],
+    [39.754656, -104.99419],
+    [39.75614, -104.9960],
+    [39.757696, -104.9940]
+  ];
+
+  // Create Bushfield polygon
+  var bushfieldPolygon = L.polygon(bushfieldCoordinates, { color: 'green' }).addTo(map);
+  var baseballLineCoordinates = [
+    [39.755, -104.995],
+    [39.753, -104.989],
+    [39.751, -104.986],
+    [39.749, -104.981]
+  ];
+
+  // Create baseball line
+  var baseballLine = L.polyline(baseballLineCoordinates, { color: 'blue' }).addTo(map);
+
+  </script>
+</body>
+
+</html>
